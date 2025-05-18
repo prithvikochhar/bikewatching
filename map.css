@@ -31,3 +31,31 @@ body {
   stroke-width: 1;
   pointer-events: auto; /* needed for tooltips later */
 }
+
+header.time-filter {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+  margin-bottom: 1em;
+}
+
+header.time-filter label {
+  margin-left: auto;
+}
+
+#selected-time,
+#any-time {
+  display: block;
+  font-size: 0.9em;
+}
+
+#any-time {
+  color: #999;
+  font-style: italic;
+}
+
+#time-slider {
+  width: 400px; /* You can change this value */
+  margin-left: 1rem;
+}
+
