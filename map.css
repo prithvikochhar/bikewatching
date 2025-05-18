@@ -30,6 +30,14 @@ body {
   stroke: white;
   stroke-width: 1;
   pointer-events: auto; /* needed for tooltips later */
+  --color-departures: steelblue;
+--color-arrivals: darkorange;
+--color: color-mix(
+  in oklch,
+  var(--color-departures) calc(100% * var(--departure-ratio)),
+  var(--color-arrivals)
+);
+fill: var(--color);
 }
 
 header.time-filter {
@@ -58,4 +66,37 @@ header.time-filter label {
   width: 400px; /* You can change this value */
   margin-left: 1rem;
 }
+
+.legend {
+  display: flex;
+  gap: 1px;
+  margin-block: 1em;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 6px;
+  /* overflow-x: auto; Allow scrolling if needed */
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+
+.legend > div {
+  flex: 1;
+  padding: 0.5em 1.2em;
+  white-space: nowrap;
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+  background: var(--color);
+  color: white;
+}
+
+.legend > div {
+  min-width: 120px;
+}
+
 

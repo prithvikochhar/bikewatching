@@ -29,6 +29,7 @@ function getCoords(station) {
 
 let departuresByMinute = Array.from({ length: 1440 }, () => []);
 let arrivalsByMinute = Array.from({ length: 1440 }, () => []);
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
 
 map.on('load', async () => {
   // Load bike lanes
@@ -102,7 +103,10 @@ map.on('load', async () => {
           .text(
             `${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`,
           );
-      });
+      })
+      .style('--departure-ratio', (d) =>
+    stationFlow(d.departures / d.totalTraffic),
+  );
 
     function updatePositions() {
       circles
@@ -145,7 +149,10 @@ map.on('load', async () => {
       circles
         .data(filteredStations, (d) => d.short_name)
         .join('circle')
-        .attr('r', (d) => radiusScale(d.totalTraffic));
+        .attr('r', (d) => radiusScale(d.totalTraffic))
+        .style('--departure-ratio', (d) =>
+    stationFlow(d.departures / d.totalTraffic),
+  );
     }
 
   } catch (err) {
